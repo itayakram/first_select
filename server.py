@@ -15,7 +15,13 @@ def main():
                 (new_socket, address) = server_socket.accept()
                 open_client_sockets.append(new_socket)
             else:
-                print 'New data from client!'
+                data = current_socket.recv(1024)
+                if data == "":
+                    open_client_sockets.remove(current_socket)
+                    print "Connection with client closed."
+                else:
+                    print data
+
 
 
 if __name__ == '__main__':
